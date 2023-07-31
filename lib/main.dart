@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           '/home': (_) => const HomePage(),
           '/welcome': (_) => const WelcomePage(),
         },
-        initialRoute: '/home',
+        initialRoute: '/welcome',
         theme: AppTheme.light,
       ),
     );

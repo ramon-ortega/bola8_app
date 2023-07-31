@@ -62,20 +62,40 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedOpacity(
             opacity: _opacityAnimation.value,
             duration: const Duration(seconds: 3),
-            child: const Text(
-              'Bienvenido!!',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            child: const Column(
+              children: [
+                Text(
+                  'Bienvenido!!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Haz una pregunta, da click en la bola o agita tu celular y descubre tu Futuro',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 60,
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -84,9 +104,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           TextButton(
             style: TextButton.styleFrom(
               padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white, // Color del texto
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 72.0),
+              backgroundColor: const Color.fromRGBO(159, 232, 255, 1),
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
             onPressed: () {
               Navigator.push(
@@ -96,7 +119,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
                 ),
               );
             },
-            child: const Text('Iniciar'),
+            child: const Text('Empezar'),
           )
         ],
       ),
