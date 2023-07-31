@@ -1,4 +1,9 @@
+import 'package:bola_app/src/config/themes/app_theme.dart';
+import 'package:bola_app/src/presentation/bloc/shake_cubit.dart';
+import 'package:bola_app/src/presentation/views/home_page.dart';
+import 'package:bola_app/src/presentation/views/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,15 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => ShakeCubit())],
+      child: MaterialApp(
+        title: 'Material App',
+        routes: {
+          '/home': (_) => const HomePage(),
+          '/welcome': (_) => const WelcomePage(),
+        },
+        initialRoute: '/home',
+        theme: AppTheme.light,
       ),
     );
   }
