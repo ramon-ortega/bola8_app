@@ -1,5 +1,8 @@
 import 'package:bola_app/src/presentation/views/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/audio_cubit.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -112,6 +115,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
               ),
             ),
             onPressed: () {
+              context.read<AudioCubit>().mapEventToState(AudioEvent.play);
               Navigator.push(
                 context,
                 MaterialPageRoute(

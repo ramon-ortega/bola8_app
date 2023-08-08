@@ -1,38 +1,37 @@
-// import 'package:audioplayers/audioplayers.dart';
-// import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-// // Eventos
-// abstract class AudioEvent {}
+enum AudioEvent { play, pause, stop }
 
-// class PlayPauseEvent extends AudioEvent {}
+enum AudioStatus { stopped, playing, paused }
 
-// // Estados
-// enum AudioState { initial, playing, paused }
+class AudioCubit extends Cubit<AudioStatus> {
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  final String assetPath =
+      'assets/song.mp3'; // Ajusta al path correcto de tu asset
 
-// class AudioStateBloc extends Bloc<AudioEvent, AudioState> {
-//   AudioPlayer _audioPlayer;
-//   final AudioCache _player = AudioCache();
+  AudioCubit() : super(AudioStatus.stopped);
 
-//   AudioStateBloc() : super(AudioState.initial) {
-//     _audioPlayer = _player.createPlayer();
-//   }
+  void mapEventToState(AudioEvent event) async {
+    switch (event) {
+      case AudioEvent.play:
+        await _audioPlayer.play(AssetSource('song.mp3'));
+        emit(AudioStatus.playing);
+        break;
+      case AudioEvent.pause:
+        await _audioPlayer.pause();
+        emit(AudioStatus.paused);
+        break;
+      case AudioEvent.stop:
+        await _audioPlayer.stop();
+        emit(AudioStatus.stopped);
+        break;
+    }
+  }
 
-//   @override
-//   Stream<AudioState> mapEventToState(AudioEvent event) async* {
-//     if (event is PlayPauseEvent) {
-//       if (state == AudioState.playing) {
-//         _audioPlayer.pause();
-//         yield AudioState.paused;
-//       } else {
-//         _audioPlayer.resume();
-//         yield AudioState.playing;
-//       }
-//     }
-//   }
-
-//   @override
-//   Future<void> close() {
-//     _audioPlayer.stop();
-//     return super.close();
-//   }
-// }
+  @override
+  Future<void> close() {
+    _audioPlayer.dispose();
+    return super.close();
+  }
+}

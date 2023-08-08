@@ -1,4 +1,5 @@
 import 'package:bola_app/src/config/themes/app_theme.dart';
+import 'package:bola_app/src/presentation/bloc/audio_cubit.dart';
 import 'package:bola_app/src/presentation/bloc/shake_cubit.dart';
 import 'package:bola_app/src/presentation/views/home_page.dart';
 import 'package:bola_app/src/presentation/views/welcome_page.dart';
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => ShakeCubit())],
+      providers: [
+        BlocProvider(create: (context) => ShakeCubit()),
+        BlocProvider(create: (context) => AudioCubit()),
+      ],
       child: MaterialApp(
         title: 'Material App',
         routes: {
