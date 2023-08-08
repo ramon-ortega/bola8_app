@@ -39,10 +39,6 @@ class ShakeCubit extends Cubit<String> {
     emit('');
   }
 
-  void imageClicked() {
-    _shakeController.add(true);
-  }
-
   @override
   Future<void> close() {
     _shakeController.close();

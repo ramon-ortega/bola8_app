@@ -43,7 +43,6 @@ class _BallAnimationState extends State<BallAnimation>
       child: GestureDetector(
         onTap: () {
           _startAnimation();
-          context.read<ShakeCubit>().imageClicked();
         },
         child: AnimatedBuilder(
           animation: _controller,
